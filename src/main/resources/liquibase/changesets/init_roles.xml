@@ -1,0 +1,25 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="init_roles" author="tmvo">
+        <createTable tableName="role">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="authority" type="varchar(256)"/>
+        </createTable>
+        <insert tableName="role">
+            <column name="id" value="1"/>
+            <column name="authority" value="admin"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="2"/>
+            <column name="authority" value="teacher"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="3"/>
+            <column name="authority" value="student"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

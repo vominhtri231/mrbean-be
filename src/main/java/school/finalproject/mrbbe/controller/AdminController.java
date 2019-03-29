@@ -1,12 +1,14 @@
 package school.finalproject.mrbbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import school.finalproject.mrbbe.dto.user.AdminDTO;
 import school.finalproject.mrbbe.service.user.AdminService;
 
 @RestController
 @RequestMapping("/admin")
+@Validated
 public class AdminController {
     @Autowired
     AdminService adminService;

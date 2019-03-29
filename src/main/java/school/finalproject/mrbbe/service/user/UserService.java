@@ -36,4 +36,8 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not found!"));
     }
+
+    public UserDTO get(long id) {
+        return userMapper.userToUserDto(find(id));
+    }
 }

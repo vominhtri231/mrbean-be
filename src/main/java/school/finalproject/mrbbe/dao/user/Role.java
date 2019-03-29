@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 import school.finalproject.mrbbe.dao.Lesson;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @ToString
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
