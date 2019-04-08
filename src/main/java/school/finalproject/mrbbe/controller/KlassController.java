@@ -9,18 +9,24 @@ import school.finalproject.mrbbe.service.KlassService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/klass")
+@RequestMapping("admin/klass")
 public class KlassController {
     @Autowired
     private KlassService klassService;
 
     @PostMapping("")
-    public Klass save(@RequestBody KlassDTO klassDTO){
+    public Klass save(@RequestBody KlassDTO klassDTO) {
         return klassService.saveKlass(klassDTO);
     }
 
     @GetMapping("")
-    public List<KlassDTO> getAll(){
+    public List<KlassDTO> getAll() {
         return klassService.getAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable int id) {
+        klassService.delete(id);
+        return "{}";
     }
 }

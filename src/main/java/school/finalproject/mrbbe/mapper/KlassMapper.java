@@ -9,6 +9,5 @@ import school.finalproject.mrbbe.dto.KlassDTO;
 public interface KlassMapper {
     KlassDTO toKlassDTO(Klass klass);
 
-    @InheritInverseConfiguration
     Klass toKlass(KlassDTO klassDTO);
 }
