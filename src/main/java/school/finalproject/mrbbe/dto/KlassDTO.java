@@ -1,9 +1,9 @@
 package school.finalproject.mrbbe.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import school.finalproject.mrbbe.dto.user.TeacherDTO;
 
 @Data
 @NoArgsConstructor
@@ -12,4 +12,7 @@ public class KlassDTO {
     private int id;
     private String name;
     private String description;
+    private TeacherDTO teacher;
+    private long teacherId;
+    private long[] studentIds;
 }

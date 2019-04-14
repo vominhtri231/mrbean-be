@@ -2,21 +2,20 @@ package school.finalproject.mrbbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import school.finalproject.mrbbe.dao.Klass;
 import school.finalproject.mrbbe.dto.KlassDTO;
 import school.finalproject.mrbbe.service.KlassService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("admin/klass")
+@RequestMapping("klass")
 public class KlassController {
     @Autowired
     private KlassService klassService;
 
     @PostMapping("")
-    public Klass save(@RequestBody KlassDTO klassDTO) {
-        return klassService.saveKlass(klassDTO);
+    public KlassDTO save(@RequestBody KlassDTO klassDTO) {
+        return klassService.create(klassDTO);
     }
 
     @GetMapping("")
@@ -24,8 +23,13 @@ public class KlassController {
         return klassService.getAll();
     }
 
+    @GetMapping("/{teacherId}")
+    public  List<KlassDTO> getAllOfTeacher(@PathVariable long teacherId) {
+        return klassService.getAllOfTeacher(teacherId);
+    }
+
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable int id) {
+    public String delete(@PathVariable long id) {
         klassService.delete(id);
         return "{}";
     }

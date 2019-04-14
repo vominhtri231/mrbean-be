@@ -1,13 +1,12 @@
 package school.finalproject.mrbbe.mapper;
 
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import school.finalproject.mrbbe.dao.Klass;
 import school.finalproject.mrbbe.dto.KlassDTO;
 
-@Mapper
+@Mapper(uses = TeacherMapper.class)
 public interface KlassMapper {
-    KlassDTO toKlassDTO(Klass klass);
+    KlassDTO klassToKlassDTO(Klass klass);
 
-    Klass toKlass(KlassDTO klassDTO);
+    Klass klassDTOtoKlass(KlassDTO klassDTO);
 }
