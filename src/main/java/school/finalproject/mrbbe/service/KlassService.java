@@ -53,6 +53,15 @@ public class KlassService {
                 .collect(Collectors.toList());
     }
 
+    public Klass find(long id) {
+        return klassRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Class is not found!"));
+    }
+
+    public KlassDTO get(long id){
+        return klassMapper.klassToKlassDTO(find(id));
+    }
+
     public List<KlassDTO> getAllOfTeacher(long teacherId) {
         Teacher teacher = teacherService.find(teacherId);
         return klassRepository
@@ -63,8 +72,7 @@ public class KlassService {
     }
 
     public void delete(long id) {
-        Klass deleteKlass = klassRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Class is not found!"));
+        Klass deleteKlass = find(id);
         klassRepository.delete(deleteKlass);
     }
 }

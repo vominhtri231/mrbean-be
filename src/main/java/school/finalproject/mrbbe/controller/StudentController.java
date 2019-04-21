@@ -5,15 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import school.finalproject.mrbbe.dto.user.StudentDTO;
 import school.finalproject.mrbbe.service.user.StudentService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/{klass_id}")
-    public void getAll(@PathVariable int klassId) {
-
+    @GetMapping("")
+    public List<StudentDTO> getAllInClass(@RequestParam long klassId) {
+        return studentService.getAllInKlass(klassId);
     }
 
     @PostMapping("")

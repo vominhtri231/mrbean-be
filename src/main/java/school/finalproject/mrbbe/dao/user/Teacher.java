@@ -13,7 +13,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +22,6 @@ public class Teacher extends User {
     private String phoneNumber;
     private Date dateOfBirth;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY)
-    List<Klass> klasses;
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Klass> klasses;
 }

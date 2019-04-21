@@ -9,6 +9,7 @@ import school.finalproject.mrbbe.dao.user.Teacher;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -31,7 +32,11 @@ public class Klass {
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "klass_student",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "klass_id")})
+            joinColumns = {@JoinColumn(name = "klass_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<Student> students = new HashSet<>();
+
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "klass", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Lesson> lessons;
 }

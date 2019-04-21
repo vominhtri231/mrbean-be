@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import school.finalproject.mrbbe.dao.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.user.StudentDTO;
 import school.finalproject.mrbbe.mapper.StudentMapper;
 import school.finalproject.mrbbe.repository.user.StudentRepository;
+import school.finalproject.mrbbe.service.KlassService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService extends UserGeneralService<Student> {
     @Autowired
-    StudentRepository studentRepository;
+    private KlassService klassService;
 
     @Autowired
-    StudentMapper studentMapper;
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     public StudentDTO create(StudentDTO studentDTO) {
         Student savingStudent = studentMapper.studentDtoToStudent(studentDTO);
@@ -34,9 +39,19 @@ public class StudentService extends UserGeneralService<Student> {
         }
     }
 
-    public List<StudentDTO> getAllStudent() {
+    public List<StudentDTO> getAll() {
         return studentRepository.findAll().stream()
                 .map(studentMapper::studentToStudentDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<StudentDTO> getAllInKlass(long klassId) {
+        Klass findingKlass = klassService.find(klassId);
+
+        return studentRepository
+                .findAllByKlassesContains(findingKlass)
+                .stream()
+                .map(student -> studentMapper.studentToStudentDto(student))
                 .collect(Collectors.toList());
     }
 

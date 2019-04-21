@@ -8,7 +8,7 @@ import school.finalproject.mrbbe.service.KlassService;
 import java.util.List;
 
 @RestController
-@RequestMapping("klass")
+@RequestMapping("/klass")
 public class KlassController {
     @Autowired
     private KlassService klassService;
@@ -23,9 +23,14 @@ public class KlassController {
         return klassService.getAll();
     }
 
-    @GetMapping("/{teacherId}")
-    public  List<KlassDTO> getAllOfTeacher(@PathVariable long teacherId) {
+    @GetMapping("?teacher={teacherId}")
+    public List<KlassDTO> getAllOfTeacher(@PathVariable long teacherId) {
         return klassService.getAllOfTeacher(teacherId);
+    }
+
+    @GetMapping("/{klassId}")
+    public KlassDTO get(@PathVariable long klassId) {
+        return klassService.get(klassId);
     }
 
     @DeleteMapping("/{id}")

@@ -13,7 +13,6 @@ import school.finalproject.mrbbe.service.user.AdminService;
 public class AdminController {
     @Autowired
     AdminService adminService;
-    
 
     @PostMapping("")
     public AdminDTO create(@RequestBody AdminDTO adminDTO) {
