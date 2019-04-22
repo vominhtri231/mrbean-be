@@ -14,5 +14,7 @@ public class LessonDTO {
 
     private String description;
 
+    private String content;
+
     private long klassId;
 }

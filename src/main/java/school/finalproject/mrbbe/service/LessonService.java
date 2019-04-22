@@ -49,6 +49,7 @@ public class LessonService {
 
         updatingLesson.setDescription(lessonDTO.getDescription());
         updatingLesson.setLessonNumber(lessonDTO.getLessonNumber());
+        updatingLesson.setContent(lessonDTO.getContent());
 
         Lesson savedLesson = lessonRepository.save(updatingLesson);
         return lessonMapper.lessonToLessonDto(savedLesson);

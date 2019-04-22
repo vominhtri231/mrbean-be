@@ -18,6 +18,9 @@ public class Lesson {
 
     private String description;
 
+    @Column(name = "content",length = 65536)
+    private String content;
+
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "klass_id")
