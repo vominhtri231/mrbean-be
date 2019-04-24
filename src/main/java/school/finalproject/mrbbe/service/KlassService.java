@@ -58,7 +58,7 @@ public class KlassService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Class is not found!"));
     }
 
-    public KlassDTO get(long id){
+    public KlassDTO get(long id) {
         return klassMapper.klassToKlassDTO(find(id));
     }
 
@@ -66,6 +66,14 @@ public class KlassService {
         Teacher teacher = teacherService.find(teacherId);
         return klassRepository
                 .findAllByTeacher(teacher)
+                .stream()
+                .map(klass -> klassMapper.klassToKlassDTO(klass))
+                .collect(Collectors.toList());
+    }
+
+    public List<KlassDTO> getAllOfStudent(long studentId) {
+        Student student = studentService.find(studentId);
+        return klassRepository.findAllByStudentsContains(student)
                 .stream()
                 .map(klass -> klassMapper.klassToKlassDTO(klass))
                 .collect(Collectors.toList());

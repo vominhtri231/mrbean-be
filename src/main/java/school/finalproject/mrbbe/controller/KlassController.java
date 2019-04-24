@@ -28,6 +28,11 @@ public class KlassController {
         return klassService.getAllOfTeacher(teacherId);
     }
 
+    @GetMapping("?student={studentId}")
+    public List<KlassDTO> getAllOfStudent(@PathVariable long studentId) {
+        return klassService.getAllOfStudent(studentId);
+    }
+
     @GetMapping("/{klassId}")
     public KlassDTO get(@PathVariable long klassId) {
         return klassService.get(klassId);
