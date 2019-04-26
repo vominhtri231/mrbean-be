@@ -60,7 +60,7 @@ public class LessonService {
         lessonRepository.delete(lesson);
     }
 
-    private Lesson find(long id) {
+    public Lesson find(long id) {
         return lessonRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lesson is not found!"));
     }

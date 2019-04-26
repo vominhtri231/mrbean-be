@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import school.finalproject.mrbbe.dao.Lesson;
 import school.finalproject.mrbbe.dto.LessonDTO;
 
-@Mapper
+@Mapper(uses = HomeworkMapper.class)
 public interface LessonMapper {
     Lesson lessonDtoToLesson(LessonDTO lessonDTO);
 
