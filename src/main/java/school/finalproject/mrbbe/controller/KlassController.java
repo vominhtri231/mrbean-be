@@ -13,12 +13,12 @@ public class KlassController {
     @Autowired
     private KlassService klassService;
 
-    @PostMapping("")
+    @PostMapping
     public KlassDTO save(@RequestBody KlassDTO klassDTO) {
         return klassService.create(klassDTO);
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<KlassDTO> getAll() {
         return klassService.getAll();
     }
@@ -36,6 +36,21 @@ public class KlassController {
     @GetMapping("/{klassId}")
     public KlassDTO get(@PathVariable long klassId) {
         return klassService.get(klassId);
+    }
+
+    @PutMapping
+    public KlassDTO updateKlass(@RequestBody KlassDTO klassDTO) {
+        return klassService.updateKlass(klassDTO);
+    }
+
+    @PutMapping("/removeStudents")
+    public KlassDTO removeStudentsInKlass(@RequestBody KlassDTO klassDTO) {
+        return klassService.removeStudents(klassDTO);
+    }
+
+    @PutMapping("/addStudents")
+    public KlassDTO addStudentsToKlass(@RequestBody KlassDTO klassDTO) {
+        return klassService.addStudents(klassDTO);
     }
 
     @DeleteMapping("/{id}")

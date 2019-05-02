@@ -59,7 +59,6 @@ public class HomeworkStudentService {
                     } catch (ResponseStatusException e) {
                         return HomeworkStudent.builder()
                                 .choices(new ArrayList<>())
-                                .result(0)
                                 .student(student)
                                 .build();
                     }

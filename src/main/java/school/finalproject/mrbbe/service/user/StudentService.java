@@ -39,12 +39,6 @@ public class StudentService extends UserGeneralService<Student> {
         }
     }
 
-    public List<StudentDTO> getAll() {
-        return studentRepository.findAll().stream()
-                .map(studentMapper::studentToStudentDto)
-                .collect(Collectors.toList());
-    }
-
     public List<StudentDTO> getAllInKlass(long klassId) {
         Klass findingKlass = klassService.find(klassId);
 
@@ -53,6 +47,32 @@ public class StudentService extends UserGeneralService<Student> {
                 .stream()
                 .map(student -> studentMapper.studentToStudentDto(student))
                 .collect(Collectors.toList());
+    }
+
+    public List<StudentDTO> getAll() {
+        return studentRepository.findAll()
+                .stream()
+                .map(student -> studentMapper.studentToStudentDto(student))
+                .collect(Collectors.toList());
+    }
+
+    public StudentDTO update(StudentDTO studentDTO) {
+        Student updatingStudent = find(studentDTO.getId());
+
+        updatingStudent.setDateOfBirth(studentDTO.getDateOfBirth());
+        updatingStudent.setName(studentDTO.getName());
+        updatingStudent.setPhoneNumber(studentDTO.getPhoneNumber());
+        updatingStudent.setWorker(studentDTO.isWorker());
+        updatingStudent.setEmail(studentDTO.getEmail());
+        updatingStudent.setWorkspace(studentDTO.getWorkspace());
+
+        Student updatedStudent = studentRepository.save(updatingStudent);
+        return studentMapper.studentToStudentDto(updatedStudent);
+    }
+
+    public StudentDTO get(long id) {
+        Student foundStudent = find(id);
+        return studentMapper.studentToStudentDto(foundStudent);
     }
 
     public Student find(long id) {

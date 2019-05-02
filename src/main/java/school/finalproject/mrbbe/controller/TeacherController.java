@@ -13,13 +13,23 @@ public class TeacherController {
     @Autowired
     TeacherService teacherService;
 
-    @PostMapping("")
+    @PostMapping
     public TeacherDTO create(@RequestBody TeacherDTO TeacherDTO) {
         return teacherService.create(TeacherDTO);
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<TeacherDTO> getAll() {
         return teacherService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public TeacherDTO get(@PathVariable long id) {
+        return teacherService.get(id);
+    }
+
+    @PutMapping
+    public TeacherDTO update(@RequestBody TeacherDTO teacherDTO) {
+        return teacherService.update(teacherDTO);
     }
 }

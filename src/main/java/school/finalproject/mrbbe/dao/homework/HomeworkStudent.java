@@ -39,6 +39,4 @@ public class HomeworkStudent implements Serializable {
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<Integer> choices;
-
-    private int result;
 }

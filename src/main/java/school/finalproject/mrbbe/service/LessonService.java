@@ -51,8 +51,8 @@ public class LessonService {
         updatingLesson.setLessonNumber(lessonDTO.getLessonNumber());
         updatingLesson.setContent(lessonDTO.getContent());
 
-        Lesson savedLesson = lessonRepository.save(updatingLesson);
-        return lessonMapper.lessonToLessonDto(savedLesson);
+        Lesson updatedLesson = lessonRepository.save(updatingLesson);
+        return lessonMapper.lessonToLessonDto(updatedLesson);
     }
 
     public void delete(long id) {

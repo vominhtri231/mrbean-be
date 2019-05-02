@@ -15,8 +15,6 @@ import school.finalproject.mrbbe.repository.HomeworkRepository;
 import school.finalproject.mrbbe.service.LessonService;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class HomeworkService {
@@ -28,9 +26,6 @@ public class HomeworkService {
 
     @Autowired
     private LessonService lessonService;
-
-    @Autowired
-    private HomeworkStudentService homeworkStudentService;
 
     public HomeworkDTO createHomework(HomeworkDTO homeworkDTO) {
         Lesson lesson = lessonService.find(homeworkDTO.getLessonId());
@@ -59,11 +54,6 @@ public class HomeworkService {
     public HomeworkDTO endHomework(long id) {
         Homework endingHomework = find(id);
         endedHomework(endingHomework);
-        Set<HomeworkStudent> homeworkStudentSet = endingHomework.getHomeworkStudents();
-        homeworkStudentSet
-                .stream()
-                .peek(homeworkStudent -> homeworkStudent.setResult(calculateResult(endingHomework, homeworkStudent)))
-                .map(homeworkStudent -> homeworkStudentService.save(homeworkStudent));
         return endedHomework(endingHomework);
     }
 
@@ -82,6 +72,11 @@ public class HomeworkService {
         return Math.round(rightAnswer * 100f / questionList.size());
     }
 
+    private Question convertToQuestion(Object json) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.convertValue(json, Question.class);
+    }
+
     private HomeworkDTO endedHomework(Homework savingHomework) {
         savingHomework.setEnded(true);
         return save(savingHomework);
@@ -90,11 +85,6 @@ public class HomeworkService {
     private HomeworkDTO save(Homework savingHomework) {
         Homework savedHomework = homeworkRepository.save(savingHomework);
         return homeworkMapper.homeworkToHomeworkDto(savedHomework);
-    }
-
-    private Question convertToQuestion(Object json) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.convertValue(json, Question.class);
     }
 
     public Homework find(long homeworkId) {

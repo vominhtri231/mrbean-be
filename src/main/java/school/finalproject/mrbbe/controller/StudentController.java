@@ -13,13 +13,28 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping("")
+    @GetMapping
     public List<StudentDTO> getAllInClass(@RequestParam long klassId) {
         return studentService.getAllInKlass(klassId);
     }
 
-    @PostMapping("")
+    @GetMapping("/all")
+    public List<StudentDTO> getAll() {
+        return studentService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public StudentDTO get(@PathVariable long id) {
+        return studentService.get(id);
+    }
+
+    @PostMapping
     public StudentDTO create(@RequestBody StudentDTO studentDTO) {
         return studentService.create(studentDTO);
+    }
+
+    @PutMapping
+    public StudentDTO update(@RequestBody StudentDTO studentDTO) {
+        return studentService.update(studentDTO);
     }
 }

@@ -79,8 +79,39 @@ public class KlassService {
                 .collect(Collectors.toList());
     }
 
+    public KlassDTO updateKlass(KlassDTO klassDTO) {
+        Klass updatingKlass = find(klassDTO.getId());
+        updatingKlass.setTeacher(teacherService.find(klassDTO.getTeacherId()));
+        updatingKlass.setName(klassDTO.getName());
+        updatingKlass.setDescription(klassDTO.getDescription());
+        Klass updatedKlass = klassRepository.save(updatingKlass);
+        return klassMapper.klassToKlassDTO(updatedKlass);
+    }
+
     public void delete(long id) {
         Klass deleteKlass = find(id);
         klassRepository.delete(deleteKlass);
+    }
+
+    public KlassDTO removeStudents(KlassDTO klassDTO) {
+        Klass klass = find(klassDTO.getId());
+        long[] studentIds = klassDTO.getStudentIds();
+        for (long studentId : studentIds) {
+            Student removingStudent = studentService.find(studentId);
+            klass.getStudents().remove(removingStudent);
+        }
+        Klass removedStudentKlass = klassRepository.save(klass);
+        return klassMapper.klassToKlassDTO(removedStudentKlass);
+    }
+
+    public KlassDTO addStudents(KlassDTO klassDTO) {
+        Klass klass = find(klassDTO.getId());
+        long[] studentIds = klassDTO.getStudentIds();
+        for (long studentId : studentIds) {
+            Student addingStudent = studentService.find(studentId);
+            klass.getStudents().add(addingStudent);
+        }
+        Klass removedStudentKlass = klassRepository.save(klass);
+        return klassMapper.klassToKlassDTO(removedStudentKlass);
     }
 }

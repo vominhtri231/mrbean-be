@@ -8,7 +8,6 @@ import school.finalproject.mrbbe.dao.user.User;
 import school.finalproject.mrbbe.dto.user.UserDTO;
 import school.finalproject.mrbbe.mapper.UserMapper;
 import school.finalproject.mrbbe.repository.user.UserRepository;
-import school.finalproject.mrbbe.support.Constant;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,5 +25,15 @@ public class UserService {
         return userRepository.findAll().stream()
                 .map(userMapper::userToUserDto)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteUser(long id) {
+        User user = find(id);
+        userRepository.delete(user);
+    }
+
+    private User find(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User is not found!"));
     }
 }

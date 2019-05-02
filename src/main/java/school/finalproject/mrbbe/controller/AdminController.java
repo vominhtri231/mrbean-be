@@ -1,10 +1,7 @@
 package school.finalproject.mrbbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import school.finalproject.mrbbe.dto.user.AdminDTO;
 import school.finalproject.mrbbe.service.user.AdminService;
 
@@ -14,8 +11,18 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @PostMapping("")
+    @PostMapping
     public AdminDTO create(@RequestBody AdminDTO adminDTO) {
         return adminService.create(adminDTO);
+    }
+
+    @GetMapping("/{id}")
+    public AdminDTO get(@PathVariable long id) {
+        return adminService.get(id);
+    }
+
+    @PutMapping
+    public AdminDTO update(@RequestBody AdminDTO adminDTO) {
+        return adminService.update(adminDTO);
     }
 }

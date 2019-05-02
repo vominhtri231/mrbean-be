@@ -15,7 +15,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("")
-    public List<UserDTO> getAllUsers(){
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable long id) {
+        userService.deleteUser(id);
+        return "{}";
     }
 }

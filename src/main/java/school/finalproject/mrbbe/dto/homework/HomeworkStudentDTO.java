@@ -16,5 +16,4 @@ public class HomeworkStudentDTO {
     private long homeworkId;
     private long studentId;
     private List<Integer> choices;
-    private int result;
 }
