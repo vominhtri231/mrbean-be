@@ -1,4 +1,4 @@
-package school.finalproject.mrbbe.repository;
+package school.finalproject.mrbbe.repository.homework;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import school.finalproject.mrbbe.dao.homework.Homework;

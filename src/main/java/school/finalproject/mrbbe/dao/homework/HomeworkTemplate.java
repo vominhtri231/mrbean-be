@@ -1,5 +1,6 @@
 package school.finalproject.mrbbe.dao.homework;
 
+
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,13 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import school.finalproject.mrbbe.dao.lesson.Lesson;
+import school.finalproject.mrbbe.dao.lesson.LessonTemplate;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -23,32 +21,18 @@ import java.util.Set;
         name = "jsonb",
         typeClass = JsonBinaryType.class
 )
-public class Homework {
+public class HomeworkTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
-
-    private Date deathLine;
-
-    private boolean ended;
 
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lesson_id")
-    private Lesson lesson;
+    @JoinColumn(name = "lesson_template_id")
+    private LessonTemplate lessonTemplate;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
     private List<Question> questions;
-
-    @OneToMany(
-            mappedBy = "homework",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
-    @EqualsAndHashCode.Exclude
-    private Set<HomeworkStudent> homeworkStudents = new HashSet<>();
 }

@@ -1,8 +1,8 @@
 package school.finalproject.mrbbe.mapper;
 
 import org.mapstruct.Mapper;
-import school.finalproject.mrbbe.dao.Klass;
-import school.finalproject.mrbbe.dto.KlassDTO;
+import school.finalproject.mrbbe.dao.klass.Klass;
+import school.finalproject.mrbbe.dto.klass.KlassDTO;
 
 @Mapper(uses = TeacherMapper.class)
 public interface KlassMapper {

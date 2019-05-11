@@ -1,4 +1,4 @@
-package school.finalproject.mrbbe.dto;
+package school.finalproject.mrbbe.dto.klass;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

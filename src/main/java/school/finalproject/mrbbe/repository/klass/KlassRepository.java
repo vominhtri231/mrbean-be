@@ -1,8 +1,8 @@
-package school.finalproject.mrbbe.repository;
+package school.finalproject.mrbbe.repository.klass;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import school.finalproject.mrbbe.dao.Klass;
+import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dao.user.Teacher;
 

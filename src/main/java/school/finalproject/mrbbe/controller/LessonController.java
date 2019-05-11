@@ -2,8 +2,8 @@ package school.finalproject.mrbbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import school.finalproject.mrbbe.dto.LessonDTO;
-import school.finalproject.mrbbe.service.LessonService;
+import school.finalproject.mrbbe.dto.lesson.LessonDTO;
+import school.finalproject.mrbbe.service.lesson.LessonService;
 
 import java.util.List;
 

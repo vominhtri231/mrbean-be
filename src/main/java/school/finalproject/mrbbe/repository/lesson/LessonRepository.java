@@ -1,10 +1,9 @@
-package school.finalproject.mrbbe.repository;
+package school.finalproject.mrbbe.repository.lesson;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import school.finalproject.mrbbe.dao.Klass;
-import school.finalproject.mrbbe.dao.Lesson;
-import school.finalproject.mrbbe.dao.user.Teacher;
+import school.finalproject.mrbbe.dao.klass.Klass;
+import school.finalproject.mrbbe.dao.lesson.Lesson;
 
 import java.util.List;
 

@@ -1,15 +1,15 @@
-package school.finalproject.mrbbe.service;
+package school.finalproject.mrbbe.service.klass;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.finalproject.mrbbe.dao.Klass;
+import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dao.user.Teacher;
-import school.finalproject.mrbbe.dto.KlassDTO;
+import school.finalproject.mrbbe.dto.klass.KlassDTO;
 import school.finalproject.mrbbe.mapper.KlassMapper;
-import school.finalproject.mrbbe.repository.KlassRepository;
+import school.finalproject.mrbbe.repository.klass.KlassRepository;
 import school.finalproject.mrbbe.service.user.StudentService;
 import school.finalproject.mrbbe.service.user.TeacherService;
 

@@ -1,7 +1,7 @@
 package school.finalproject.mrbbe.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import school.finalproject.mrbbe.dao.Klass;
+import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 
 import java.util.List;

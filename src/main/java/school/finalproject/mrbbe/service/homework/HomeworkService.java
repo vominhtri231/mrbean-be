@@ -5,14 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.finalproject.mrbbe.dao.Lesson;
+import school.finalproject.mrbbe.dao.lesson.Lesson;
 import school.finalproject.mrbbe.dao.homework.Homework;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
 import school.finalproject.mrbbe.dao.homework.Question;
 import school.finalproject.mrbbe.dto.homework.HomeworkDTO;
 import school.finalproject.mrbbe.mapper.HomeworkMapper;
-import school.finalproject.mrbbe.repository.HomeworkRepository;
-import school.finalproject.mrbbe.service.LessonService;
+import school.finalproject.mrbbe.repository.homework.HomeworkRepository;
+import school.finalproject.mrbbe.service.lesson.LessonService;
 
 import java.util.List;
 

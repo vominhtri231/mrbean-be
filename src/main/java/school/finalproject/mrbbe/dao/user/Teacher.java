@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import school.finalproject.mrbbe.dao.Klass;
+import school.finalproject.mrbbe.dao.klass.Klass;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

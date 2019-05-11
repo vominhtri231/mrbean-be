@@ -4,12 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.finalproject.mrbbe.dao.Klass;
+import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.user.StudentDTO;
 import school.finalproject.mrbbe.mapper.StudentMapper;
 import school.finalproject.mrbbe.repository.user.StudentRepository;
-import school.finalproject.mrbbe.service.KlassService;
+import school.finalproject.mrbbe.service.klass.KlassService;
 
 import java.util.List;
 import java.util.stream.Collectors;

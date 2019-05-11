@@ -10,7 +10,7 @@ import school.finalproject.mrbbe.dao.homework.HomeworkStudentId;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.homework.HomeworkStudentDTO;
 import school.finalproject.mrbbe.mapper.HomeworkStudentMapper;
-import school.finalproject.mrbbe.repository.HomeworkStudentRepository;
+import school.finalproject.mrbbe.repository.homework.HomeworkStudentRepository;
 import school.finalproject.mrbbe.service.user.StudentService;
 
 import java.util.ArrayList;

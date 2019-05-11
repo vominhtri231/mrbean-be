@@ -1,10 +1,9 @@
 package school.finalproject.mrbbe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import school.finalproject.mrbbe.dto.KlassDTO;
-import school.finalproject.mrbbe.service.KlassService;
+import school.finalproject.mrbbe.dto.klass.KlassDTO;
+import school.finalproject.mrbbe.service.klass.KlassService;
 
 import java.util.List;
 

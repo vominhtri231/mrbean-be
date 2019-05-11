@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
-import school.finalproject.mrbbe.dao.Lesson;
 
 import javax.persistence.*;
 import java.util.List;

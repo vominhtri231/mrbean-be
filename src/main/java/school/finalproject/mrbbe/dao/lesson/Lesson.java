@@ -1,8 +1,9 @@
-package school.finalproject.mrbbe.dao;
+package school.finalproject.mrbbe.dao.lesson;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import school.finalproject.mrbbe.dao.homework.Homework;
+import school.finalproject.mrbbe.dao.klass.Klass;
 
 import javax.persistence.*;
 import java.util.ArrayList;

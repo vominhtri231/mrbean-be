@@ -1,9 +1,10 @@
-package school.finalproject.mrbbe.dao;
+package school.finalproject.mrbbe.dao.klass;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import school.finalproject.mrbbe.dao.lesson.Lesson;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dao.user.Teacher;
 
