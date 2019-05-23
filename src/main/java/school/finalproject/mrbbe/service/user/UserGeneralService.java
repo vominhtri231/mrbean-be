@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 import school.finalproject.mrbbe.dao.user.User;
 import school.finalproject.mrbbe.repository.user.UserRepository;
-import school.finalproject.mrbbe.support.Constant;
+import school.finalproject.mrbbe.support.Constant.PasswordConstant;
 
 public abstract class UserGeneralService<T extends User> {
     @Autowired
@@ -17,7 +17,7 @@ public abstract class UserGeneralService<T extends User> {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User existed");
                 }
         );
-        user.setPassword(Constant.defaultPassword);
+        user.setPassword(PasswordConstant.defaultPassword);
         return user;
     }
 }

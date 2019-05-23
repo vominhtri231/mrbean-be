@@ -54,6 +54,7 @@ public class HomeworkService {
     public HomeworkDTO endHomework(long id) {
         Homework endingHomework = find(id);
         endedHomework(endingHomework);
+        //calculateResult(endingHomework)
         return endedHomework(endingHomework);
     }
 
