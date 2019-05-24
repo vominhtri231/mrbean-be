@@ -88,7 +88,7 @@ public class HomeworkStudentService {
         return homeworkStudentMapper.homeworkStudentToHomeworkStudentDto(updatedHomeworkStudent);
     }
 
-    private HomeworkStudent find(long homeworkId, long studentId) throws ResponseStatusException {
+    public HomeworkStudent find(long homeworkId, long studentId) throws ResponseStatusException {
         Homework homework = homeworkService.find(homeworkId);
         Student student = studentService.find(studentId);
         return homeworkStudentRepository.findFirstByHomeworkAndStudent(homework, student)

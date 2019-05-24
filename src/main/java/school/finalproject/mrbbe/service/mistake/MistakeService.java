@@ -18,6 +18,7 @@ import school.finalproject.mrbbe.service.user.StudentService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -58,10 +59,10 @@ public class MistakeService {
     public List<MistakeDTO> getAllOfKlassAndStudent(long klassId, long studentId) {
         Klass klass = klassService.find(klassId);
         Student student = studentService.find(studentId);
-        Stream<Lesson> lessonStream = klass.getLessons().stream();
+        List<Lesson> lessons = klass.getLessons();
         List<Mistake> mistakesOfStudent = mistakeRepository.findAllByStudent(student);
         return mistakesOfStudent.stream()
-                .filter(mistake -> lessonStream.anyMatch(lesson -> lesson.getId() == mistake.getLesson().getId()))
+                .filter(mistake -> lessons.stream().anyMatch(lesson -> lesson.getId() == mistake.getLesson().getId()))
                 .map(mistakeMapper::mistakeToMistakeDTO)
                 .collect(Collectors.toList());
     }

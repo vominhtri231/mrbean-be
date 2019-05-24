@@ -1,20 +1,30 @@
 package school.finalproject.mrbbe.service.homework;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.finalproject.mrbbe.dao.lesson.Lesson;
 import school.finalproject.mrbbe.dao.homework.Homework;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
-import school.finalproject.mrbbe.dao.homework.Question;
+import school.finalproject.mrbbe.dao.lesson.Lesson;
+import school.finalproject.mrbbe.dao.mistake.Mistake;
+import school.finalproject.mrbbe.dao.mistake.MistakeRule;
+import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.homework.HomeworkDTO;
 import school.finalproject.mrbbe.mapper.HomeworkMapper;
+import school.finalproject.mrbbe.mapper.MistakeMapper;
+import school.finalproject.mrbbe.mapper.MistakeRuleMapper;
 import school.finalproject.mrbbe.repository.homework.HomeworkRepository;
+import school.finalproject.mrbbe.repository.homework.HomeworkStudentRepository;
+import school.finalproject.mrbbe.repository.mistake.MistakeRepository;
 import school.finalproject.mrbbe.service.lesson.LessonService;
+import school.finalproject.mrbbe.service.mistake.MistakeRuleService;
+import school.finalproject.mrbbe.service.mistake.MistakeService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class HomeworkService {
@@ -26,6 +36,24 @@ public class HomeworkService {
 
     @Autowired
     private LessonService lessonService;
+
+    @Autowired
+    private MistakeRuleService mistakeRuleService;
+
+    @Autowired
+    private MistakeService mistakeService;
+
+    @Autowired
+    private MistakeMapper mistakeMapper;
+
+    @Autowired
+    private MistakeRuleMapper mistakeRuleMapper;
+
+    @Autowired
+    private HomeworkStudentRepository homeworkStudentRepository;
+
+    @Autowired
+    private MistakeRepository mistakeRepository;
 
     public HomeworkDTO createHomework(HomeworkDTO homeworkDTO) {
         Lesson lesson = lessonService.find(homeworkDTO.getLessonId());
@@ -52,30 +80,26 @@ public class HomeworkService {
     }
 
     public HomeworkDTO endHomework(long id) {
+        List<MistakeRule> mistakeRules = mistakeRuleService.getAll()
+                .stream()
+                .map(mistakeRuleMapper::mistakeRuleDTOToMistakeRule)
+                .collect(Collectors.toList());
         Homework endingHomework = find(id);
         endedHomework(endingHomework);
-        //calculateResult(endingHomework)
-        return endedHomework(endingHomework);
-    }
-
-    private int calculateResult(Homework homework, HomeworkStudent homeworkStudent) {
-        List<Question> questionList = homework.getQuestions();
-        if (questionList.size() == 0) return 0;
-        List<Integer> answers = homeworkStudent.getChoices();
-        int rightAnswer = 0;
-        for (int i = 0; i < questionList.size(); i++) {
-            Question question = convertToQuestion(questionList.get(i));
-            Integer answer = answers.get(i);
-            if (question.getCorrectAnswer().equals(answer)) {
-                rightAnswer++;
+        Lesson lesson = endingHomework.getLesson();
+        Set<Student> students = lesson.getKlass().getStudents();
+        for (Student student : students) {
+            Optional<HomeworkStudent> optionalHomeworkStudent =
+                    homeworkStudentRepository.findFirstByHomeworkAndStudent(endingHomework, student);
+            HomeworkResult homeworkResult = optionalHomeworkStudent
+                    .map(optional -> new HomeworkResult(endingHomework, optional))
+                    .orElseGet(() -> new HomeworkResult(endingHomework.getLesson(), student));
+            List<Mistake> mistakes = homeworkResult.getMistakes(mistakeRules);
+            for (Mistake mistake : mistakes) {
+                mistakeRepository.save(mistake);
             }
         }
-        return Math.round(rightAnswer * 100f / questionList.size());
-    }
-
-    private Question convertToQuestion(Object json) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.convertValue(json, Question.class);
+        return endedHomework(endingHomework);
     }
 
     private HomeworkDTO endedHomework(Homework savingHomework) {
@@ -93,3 +117,4 @@ public class HomeworkService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Homework is not found!"));
     }
 }
+
