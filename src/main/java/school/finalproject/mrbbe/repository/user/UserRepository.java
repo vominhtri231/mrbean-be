@@ -6,5 +6,5 @@ import school.finalproject.mrbbe.dao.user.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findUserByEmailIgnoreCase(String email);
+    Optional<User> findByEmailIgnoreCase(String email);
 }

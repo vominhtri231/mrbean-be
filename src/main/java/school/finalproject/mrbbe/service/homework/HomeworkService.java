@@ -41,12 +41,6 @@ public class HomeworkService {
     private MistakeRuleService mistakeRuleService;
 
     @Autowired
-    private MistakeService mistakeService;
-
-    @Autowired
-    private MistakeMapper mistakeMapper;
-
-    @Autowired
     private MistakeRuleMapper mistakeRuleMapper;
 
     @Autowired
