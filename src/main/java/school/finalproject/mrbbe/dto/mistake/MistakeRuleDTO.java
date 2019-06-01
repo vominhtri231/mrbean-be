@@ -14,5 +14,4 @@ public class MistakeRuleDTO {
     private String mistakeStandard;
     private MistakeTypeDTO mistakeType;
     private int threshold;
-    private int number;
 }

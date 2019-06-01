@@ -42,8 +42,8 @@ public class MistakeTypeService {
         return mistakeTypeMapper.mistakeTypeToMistakeTypeDTO(updatedMistakeType);
     }
 
-    public void deleteMistakeType(long id){
-        MistakeType mistakeType=find(id);
+    public void deleteMistakeType(long id) {
+        MistakeType mistakeType = find(id);
         mistakeTypeRepository.delete(mistakeType);
     }
 

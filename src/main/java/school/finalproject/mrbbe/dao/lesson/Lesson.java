@@ -11,7 +11,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "lesson")
+@Table(name = "lesson",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"klass_id", "lessonNumber"}))
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

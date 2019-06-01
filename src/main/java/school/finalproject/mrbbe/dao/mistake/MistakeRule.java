@@ -17,7 +17,6 @@ public class MistakeRule {
     private String mistakeStandard;
 
     private int threshold;
-    private int number;
 
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

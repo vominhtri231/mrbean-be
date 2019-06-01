@@ -25,7 +25,7 @@ public class MistakeRuleService {
     private MistakeTypeService mistakeTypeService;
 
     public List<MistakeRuleDTO> getAll() {
-        return mistakeRuleRepository.findAllByOrderByNumber()
+        return mistakeRuleRepository.findAll()
                 .stream()
                 .map(mistakeRuleMapper::mistakeRuleToMistakeRuleDTO)
                 .collect(Collectors.toList());
@@ -35,7 +35,6 @@ public class MistakeRuleService {
         MistakeRule oldMistakeRule = find(mistakeRuleDTO.getId());
         oldMistakeRule.setMistakeStandard(mistakeRuleDTO.getMistakeStandard());
         oldMistakeRule.setMistakeType(mistakeTypeService.find(mistakeRuleDTO.getMistakeType().getId()));
-        oldMistakeRule.setNumber(mistakeRuleDTO.getNumber());
         oldMistakeRule.setThreshold(mistakeRuleDTO.getThreshold());
         MistakeRule updatedMistakeRule = mistakeRuleRepository.save(oldMistakeRule);
         return mistakeRuleMapper.mistakeRuleToMistakeRuleDTO(updatedMistakeRule);
@@ -43,17 +42,9 @@ public class MistakeRuleService {
 
     public MistakeRuleDTO create(MistakeRuleDTO mistakeRuleDTO) {
         MistakeRule mistakeRule = mistakeRuleMapper.mistakeRuleDTOToMistakeRule(mistakeRuleDTO);
-        mistakeRule.setNumber(getNextNumber());
         mistakeRule.setMistakeType(mistakeTypeService.find(mistakeRuleDTO.getMistakeType().getId()));
         MistakeRule createdMistakeRule = mistakeRuleRepository.save(mistakeRule);
         return mistakeRuleMapper.mistakeRuleToMistakeRuleDTO(createdMistakeRule);
-    }
-
-    private int getNextNumber() {
-        List<MistakeRuleDTO> mistakeRuleDTOS = getAll();
-        if (mistakeRuleDTOS.size() == 0) return 1;
-        MistakeRuleDTO lastNumberRule = mistakeRuleDTOS.get(mistakeRuleDTOS.size() - 1);
-        return lastNumberRule.getNumber() + 1;
     }
 
     public void delete(long id) {

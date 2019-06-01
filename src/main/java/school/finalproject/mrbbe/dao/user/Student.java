@@ -22,6 +22,8 @@ public class Student extends User {
     private String phoneNumber;
     private Date dateOfBirth;
     private String workspace;
+
+    @Column(name = "is_worker")
     private boolean isWorker;
 
     @EqualsAndHashCode.Exclude
