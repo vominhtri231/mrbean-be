@@ -23,13 +23,13 @@ public class KlassController {
         return klassService.getAll();
     }
 
-    @GetMapping("?teacher={teacherId}")
-    public List<KlassDTO> getAllOfTeacher(@PathVariable long teacherId) {
+    @GetMapping("/teacher")
+    public List<KlassDTO> getAllOfTeacher(@RequestParam long teacherId) {
         return klassService.getAllOfTeacher(teacherId);
     }
 
-    @GetMapping("?student={studentId}")
-    public List<KlassDTO> getAllOfStudent(@PathVariable long studentId) {
+    @GetMapping("/student")
+    public List<KlassDTO> getAllOfStudent(@RequestParam long studentId) {
         return klassService.getAllOfStudent(studentId);
     }
 
