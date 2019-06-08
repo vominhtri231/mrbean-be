@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import school.finalproject.mrbbe.dao.homework.Homework;
 import school.finalproject.mrbbe.dao.klass.Klass;
+import school.finalproject.mrbbe.dao.mistake.Mistake;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Lesson {
 
     private String description;
 
-    @Column(name = "content", length = 65536)
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @EqualsAndHashCode.Exclude
@@ -33,4 +34,8 @@ public class Lesson {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Homework> homeworkList = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Mistake> mistakes = new ArrayList<>();
 }

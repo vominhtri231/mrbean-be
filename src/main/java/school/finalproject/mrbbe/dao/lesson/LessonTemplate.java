@@ -22,7 +22,7 @@ public class LessonTemplate {
 
     private String description;
 
-    @Column(name = "content", length = 65536)
+    @Column(name = "content",  columnDefinition = "text")
     private String content;
 
     @EqualsAndHashCode.Exclude
