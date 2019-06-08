@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import school.finalproject.mrbbe.dto.homework.HomeworkDTO;
 
+import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -16,6 +17,8 @@ public class LessonDTO {
     private long id;
 
     private int lessonNumber;
+
+    private Date teachingDate;
 
     private String description;
 

@@ -9,7 +9,5 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findUserByEmailIgnoreCase(String email);
-
-    List<Student> findAllByKlassesContains(Klass klass);
 }
 

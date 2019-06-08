@@ -13,11 +13,6 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
-    @GetMapping
-    public List<StudentDTO> getAllInClass(@RequestParam long klassId) {
-        return studentService.getAllInKlass(klassId);
-    }
-
     @GetMapping("/all")
     public List<StudentDTO> getAll() {
         return studentService.getAll();

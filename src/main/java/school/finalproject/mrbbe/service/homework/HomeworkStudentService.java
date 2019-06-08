@@ -7,6 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import school.finalproject.mrbbe.dao.homework.Homework;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudentId;
+import school.finalproject.mrbbe.dao.klass.KlassStudent;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.homework.HomeworkStudentDTO;
 import school.finalproject.mrbbe.mapper.HomeworkStudentMapper;
@@ -51,7 +52,10 @@ public class HomeworkStudentService {
 
     public List<HomeworkStudentDTO> getAllResultOfHomework(long homeworkId) {
         Homework homework = homeworkService.find(homeworkId);
-        Set<Student> students = homework.getLesson().getKlass().getStudents();
+        Set<Student> students = homework.getLesson().getKlass().getKlassStudents()
+                .stream()
+                .map(KlassStudent::getStudent)
+                .collect(Collectors.toSet());
         return students.stream()
                 .map(student -> {
                     try {

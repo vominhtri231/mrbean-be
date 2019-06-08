@@ -6,20 +6,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.finalproject.mrbbe.dao.homework.Homework;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
+import school.finalproject.mrbbe.dao.klass.KlassStudent;
 import school.finalproject.mrbbe.dao.lesson.Lesson;
 import school.finalproject.mrbbe.dao.mistake.Mistake;
 import school.finalproject.mrbbe.dao.mistake.MistakeRule;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.homework.HomeworkDTO;
 import school.finalproject.mrbbe.mapper.HomeworkMapper;
-import school.finalproject.mrbbe.mapper.MistakeMapper;
 import school.finalproject.mrbbe.mapper.MistakeRuleMapper;
 import school.finalproject.mrbbe.repository.homework.HomeworkRepository;
 import school.finalproject.mrbbe.repository.homework.HomeworkStudentRepository;
 import school.finalproject.mrbbe.repository.mistake.MistakeRepository;
 import school.finalproject.mrbbe.service.lesson.LessonService;
 import school.finalproject.mrbbe.service.mistake.MistakeRuleService;
-import school.finalproject.mrbbe.service.mistake.MistakeService;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +80,10 @@ public class HomeworkService {
         Homework endingHomework = find(id);
         endedHomework(endingHomework);
         Lesson lesson = endingHomework.getLesson();
-        Set<Student> students = lesson.getKlass().getStudents();
+        Set<Student> students = lesson.getKlass().getKlassStudents()
+                .stream()
+                .map(KlassStudent::getStudent)
+                .collect(Collectors.toSet());
         for (Student student : students) {
             Optional<HomeworkStudent> optionalHomeworkStudent =
                     homeworkStudentRepository.findFirstByHomeworkAndStudent(endingHomework, student);

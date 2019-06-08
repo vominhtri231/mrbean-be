@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import school.finalproject.mrbbe.dao.lesson.Lesson;
-import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dao.user.Teacher;
 
 import javax.persistence.*;
@@ -29,13 +28,14 @@ public class Klass {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
+    @OneToMany(
+            mappedBy = "klass",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "klass_student",
-            joinColumns = {@JoinColumn(name = "klass_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")})
-    private Set<Student> students = new HashSet<>();
+    private Set<KlassStudent> klassStudents = new HashSet<>(0);
 
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "klass", fetch = FetchType.LAZY, orphanRemoval = true)

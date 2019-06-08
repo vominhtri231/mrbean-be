@@ -11,6 +11,4 @@ import java.util.List;
 @Repository
 public interface KlassRepository extends JpaRepository<Klass, Long> {
     List<Klass> findAllByTeacher(Teacher teacher);
-
-    List<Klass> findAllByStudentsContains(Student student);
 }

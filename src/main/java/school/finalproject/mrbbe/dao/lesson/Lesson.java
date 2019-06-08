@@ -7,6 +7,7 @@ import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.mistake.Mistake;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class Lesson {
     private long id;
 
     private int lessonNumber;
+
+    private Date teachingDate;
 
     private String description;
 

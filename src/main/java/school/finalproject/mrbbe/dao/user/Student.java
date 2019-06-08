@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
+import school.finalproject.mrbbe.dao.klass.KlassStudent;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -26,11 +27,14 @@ public class Student extends User {
     @Column(name = "is_worker")
     private boolean isWorker;
 
+    @OneToMany(
+            mappedBy = "student",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE, CascadeType.PERSIST},
-            mappedBy = "students")
-    private Set<Klass> klasses = new HashSet<>();
+    private Set<KlassStudent> klassStudents = new HashSet<>(0);
 
     @OneToMany(
             mappedBy = "student",

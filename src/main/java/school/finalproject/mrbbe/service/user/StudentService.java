@@ -4,21 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.user.StudentDTO;
 import school.finalproject.mrbbe.mapper.StudentMapper;
 import school.finalproject.mrbbe.repository.user.StudentRepository;
-import school.finalproject.mrbbe.service.klass.KlassService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class StudentService extends UserGeneralService<Student> {
-    @Autowired
-    private KlassService klassService;
-
     @Autowired
     private StudentRepository studentRepository;
 
@@ -37,16 +32,6 @@ public class StudentService extends UserGeneralService<Student> {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email existed in different role"));
             return studentMapper.studentToStudentDto(duplicateStudent);
         }
-    }
-
-    public List<StudentDTO> getAllInKlass(long klassId) {
-        Klass findingKlass = klassService.find(klassId);
-
-        return studentRepository
-                .findAllByKlassesContains(findingKlass)
-                .stream()
-                .map(student -> studentMapper.studentToStudentDto(student))
-                .collect(Collectors.toList());
     }
 
     public List<StudentDTO> getAll() {

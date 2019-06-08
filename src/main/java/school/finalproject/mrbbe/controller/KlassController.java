@@ -28,11 +28,6 @@ public class KlassController {
         return klassService.getAllOfTeacher(teacherId);
     }
 
-    @GetMapping("/student")
-    public List<KlassDTO> getAllOfStudent(@RequestParam long studentId) {
-        return klassService.getAllOfStudent(studentId);
-    }
-
     @GetMapping("/{klassId}")
     public KlassDTO get(@PathVariable long klassId) {
         return klassService.get(klassId);
@@ -41,16 +36,6 @@ public class KlassController {
     @PutMapping
     public KlassDTO updateKlass(@RequestBody KlassDTO klassDTO) {
         return klassService.updateKlass(klassDTO);
-    }
-
-    @PutMapping("/removeStudents")
-    public KlassDTO removeStudentsInKlass(@RequestBody KlassDTO klassDTO) {
-        return klassService.removeStudents(klassDTO);
-    }
-
-    @PutMapping("/addStudents")
-    public KlassDTO addStudentsToKlass(@RequestBody KlassDTO klassDTO) {
-        return klassService.addStudents(klassDTO);
     }
 
     @DeleteMapping("/{id}")
