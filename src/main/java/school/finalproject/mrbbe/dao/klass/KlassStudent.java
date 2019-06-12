@@ -28,5 +28,5 @@ public class KlassStudent {
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 
-    private Date addDate;
+    private Date registerDate;
 }

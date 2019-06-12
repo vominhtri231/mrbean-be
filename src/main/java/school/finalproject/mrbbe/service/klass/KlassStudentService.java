@@ -39,7 +39,7 @@ public class KlassStudentService {
 
     public List<StudentDTO> getAllInKlass(long klassId) {
         Klass klass = klassService.find(klassId);
-        return convertToListStudent(klassStudentRepository.findAllByKlass(klass));
+        return convertToListStudent(klassStudentRepository.findAllByKlassOrderByStudentName(klass));
     }
 
     public List<KlassDTO> getAllKlassOfStudent(long studentId) {

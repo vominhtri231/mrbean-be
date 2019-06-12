@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface KlassStudentRepository extends JpaRepository<KlassStudent, Long> {
     Optional<KlassStudent> findFirstByKlassAndStudent(Klass klass, Student student);
 
-    List<KlassStudent> findAllByKlass(Klass klass);
+    List<KlassStudent> findAllByKlassOrderByStudentName(Klass klass);
 
     List<KlassStudent> findAllByStudent(Student student);
 }

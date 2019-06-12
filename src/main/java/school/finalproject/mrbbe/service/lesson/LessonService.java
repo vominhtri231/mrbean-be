@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import school.finalproject.mrbbe.dao.klass.Klass;
+import school.finalproject.mrbbe.dao.klass.KlassStudent;
 import school.finalproject.mrbbe.dao.lesson.Lesson;
+import school.finalproject.mrbbe.dao.user.Student;
 import school.finalproject.mrbbe.dto.lesson.LessonDTO;
 import school.finalproject.mrbbe.mapper.LessonMapper;
 import school.finalproject.mrbbe.repository.lesson.LessonRepository;
@@ -17,18 +19,21 @@ import java.util.stream.Collectors;
 @Service
 public class LessonService {
     @Autowired
-    KlassService klassService;
-
-    @Autowired
-    LessonMapper lessonMapper;
+    private LessonMapper lessonMapper;
 
     @Autowired
     private LessonRepository lessonRepository;
 
+    @Autowired
+    private KlassService klassService;
+
+    @Autowired
+    private LessonAttendanceService lessonAttendanceService;
+
     public List<LessonDTO> getLessonOfKlass(long klassId) {
         Klass klass = klassService.find(klassId);
 
-        return lessonRepository.findAllByKlass(klass)
+        return lessonRepository.findAllByKlassOrderByLessonNumber(klass)
                 .stream()
                 .map(lesson -> lessonMapper.lessonToLessonDto(lesson))
                 .collect(Collectors.toList());
@@ -37,11 +42,14 @@ public class LessonService {
     public LessonDTO create(LessonDTO lessonDTO) {
         long klassId = lessonDTO.getKlassId();
         Klass klass = klassService.find(klassId);
-
         Lesson savingLesson = lessonMapper.lessonDtoToLesson(lessonDTO);
         savingLesson.setKlass(klass);
 
         Lesson savedLesson = lessonRepository.save(savingLesson);
+
+        List<Student> students = klass.getKlassStudents().stream().map(KlassStudent::getStudent).collect(Collectors.toList());
+        lessonAttendanceService.createLessonAttendanceForNewLesson(students, savedLesson);
+
         return lessonMapper.lessonToLessonDto(savedLesson);
     }
 

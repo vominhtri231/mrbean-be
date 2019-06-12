@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
-    List<Lesson> findAllByKlass(Klass klass);
+    List<Lesson> findAllByKlassOrderByLessonNumber(Klass klass);
 }

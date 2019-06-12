@@ -9,7 +9,9 @@ import school.finalproject.mrbbe.dao.mistake.Mistake;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -41,4 +43,8 @@ public class Lesson {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "lesson", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Mistake> mistakes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lesson", orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<LessonAttendance> lessonAttendances = new HashSet<>(0);
 }

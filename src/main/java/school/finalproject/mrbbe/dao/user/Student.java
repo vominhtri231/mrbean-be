@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import school.finalproject.mrbbe.dao.klass.Klass;
 import school.finalproject.mrbbe.dao.homework.HomeworkStudent;
 import school.finalproject.mrbbe.dao.klass.KlassStudent;
+import school.finalproject.mrbbe.dao.lesson.LessonAttendance;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -44,4 +44,8 @@ public class Student extends User {
     )
     @EqualsAndHashCode.Exclude
     private Set<HomeworkStudent> homeworkStudents = new HashSet<>();
+
+    @OneToMany(mappedBy = "student", orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    private Set<LessonAttendance> lessonAttendances = new HashSet<>();
 }

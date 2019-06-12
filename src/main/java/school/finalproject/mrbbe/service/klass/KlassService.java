@@ -22,13 +22,13 @@ public class KlassService {
     private KlassRepository klassRepository;
 
     @Autowired
+    private KlassMapper klassMapper;
+
+    @Autowired
     private TeacherService teacherService;
 
     @Autowired
     private KlassStudentService klassStudentService;
-
-    @Autowired
-    private KlassMapper klassMapper;
 
     public KlassDTO create(KlassDTO klassDTO) {
         Klass savingKlass = klassMapper.klassDTOtoKlass(klassDTO);
